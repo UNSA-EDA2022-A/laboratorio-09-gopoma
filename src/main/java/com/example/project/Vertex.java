@@ -12,9 +12,9 @@ public class Vertex {
     }
 
     public boolean addAdjacentVertex(Vertex to) {
-        for (Vertex v : adjacentVertices) {
+        for(Vertex v: adjacentVertices) {
             // Verificando si ya existe
-            if (v.data == to.data) {
+            if(v.data == to.data) {
                 return false;
             }
         }
@@ -24,9 +24,9 @@ public class Vertex {
     }
 
     public boolean removeAdjacentVertex(int to) {
-        for (int i = 0; i < adjacentVertices.size(); i++) {
+        for(int i = 0; i < adjacentVertices.size(); i++) {
             // Encontrando vertice adjacente
-            if (this.adjacentVertices.get(i).data == to) {
+            if(this.adjacentVertices.get(i).data == to) {
                 this.adjacentVertices.remove(i);
                 return true;
             }

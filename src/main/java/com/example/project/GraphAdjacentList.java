@@ -3,7 +3,6 @@ package com.example.project;
 import java.util.ArrayList;
 
 public class GraphAdjacentList implements Graph {
-
     private ArrayList<Vertex> vertices;
     private int numVertices;
 
@@ -14,22 +13,22 @@ public class GraphAdjacentList implements Graph {
     // Agregar una arista desde un vertice 'from' a un vertice 'to'
     public boolean addEdge(int from, int to) {
         Vertex fromV = null, toV = null;
-        for (Vertex v : vertices) {
-            if (from == v.data) { // verificando si 'from' existe
+        for(Vertex v: vertices) {
+            if(from == v.data) { // verificando si 'from' existe
                 fromV = v;
-            } else if (to == v.data) { // verificando si 'to' existe
+            } else if(to == v.data) { // verificando si 'to' existe
                 toV = v;
             }
-            if (fromV != null && toV != null) {
+            if(fromV != null && toV != null) {
                 break; // ambos nodos deben existir, si no paramos
             }
         }
-        if (fromV == null) {
+        if(fromV == null) {
             fromV = new Vertex(from);
             vertices.add(fromV);
             numVertices++;
         }
-        if (toV == null) {
+        if(toV == null) {
             toV = new Vertex(to);
             vertices.add(toV);
             numVertices++;
@@ -40,13 +39,13 @@ public class GraphAdjacentList implements Graph {
     // Eliminamos la arista del vertice 'from' al vertice 'to'
     public boolean removeEdge(int from, int to) {
         Vertex fromV = null;
-        for (Vertex v : vertices) {
-            if (from == v.data) {
+        for(Vertex v: vertices) {
+            if(from == v.data) {
                 fromV = v;
                 break;
             }
         }
-        if (fromV == null) {
+        if(fromV == null) {
             return false;
         }
         return fromV.removeAdjacentVertex(to);
@@ -55,7 +54,7 @@ public class GraphAdjacentList implements Graph {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Vertex v : vertices) {
+        for(Vertex v: vertices) {
             sb.append("Vertex: ");
             sb.append(v.data);
             sb.append("\n");
@@ -69,7 +68,7 @@ public class GraphAdjacentList implements Graph {
         return sb.toString();
     }
 
-    public int getNumEdges(){
+    public int getNumEdges() {
         int count = 0;
         for(int i = 0; i < this.vertices.size(); i++){
             count += this.vertices.get(i).adjacentVertices.size();
@@ -85,7 +84,7 @@ public class GraphAdjacentList implements Graph {
         this.numVertices = numVertices;
     }
 
-    public int countConnectedComponents(){
+    public int countConnectedComponents() {
         return -1;
     }
 
