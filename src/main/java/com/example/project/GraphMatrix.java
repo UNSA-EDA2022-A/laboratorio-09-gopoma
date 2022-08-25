@@ -73,12 +73,15 @@ public class GraphMatrix implements Graph {
         HashSet<Integer> already = new HashSet<Integer>(); // Already Visited Nodes from all DFS results
         int nV = 0; // Not Visited index
         int cc = 0; // Connected Components
+        // Case: Taking into consideration when numVertices is 0
         while(already.size() != this.numVertices) {
             ArrayList<Integer> DFS = depthFirstSearch(nV);
             for(int num: DFS) {
                 already.add(num);
             }
 
+            // Finding another vertex that was not considered in DFS's list (if exists),
+            // so there is more than a single Connected Component
             for(int i = 0; i < this.numVertices; i++) {
                 if(!DFS.contains(i) && !already.contains(i)) {
                     nV = i;
@@ -102,5 +105,16 @@ public class GraphMatrix implements Graph {
         System.out.println(graph);
         System.out.println("DFS:");
         System.out.println(graph.depthFirstSearch(0));
+
+        GraphMatrix g = new GraphMatrix(10);
+        g.addEdge(4, 5);
+        System.out.println(g.countConnectedComponents());
+        GraphMatrix g2 = new GraphMatrix(1);
+        g2.addEdge(0, 0);
+        g2.addEdge(0, 0);
+        g2.addEdge(0, 0);
+        System.out.println(g2.countConnectedComponents());
+        GraphMatrix g3 = new GraphMatrix(0);
+        System.out.println(g3.countConnectedComponents());
     }
 }
