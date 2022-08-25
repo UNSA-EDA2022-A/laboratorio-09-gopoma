@@ -140,14 +140,12 @@ public class GraphAdjacentList implements Graph {
             }
         }
         // If was not found, just return false
-        if(target == null) {
+        if(target == null)
             return false;
-        }
 
         // As target.adjacentVertices could be resized, a normal iteration will ignore some adjacent values when deleting
-        while(!target.adjacentVertices.isEmpty()) {
+        while(!target.adjacentVertices.isEmpty())
             this.removeEdge(vertex, target.adjacentVertices.get(0).data);
-        }
         this.vertices.remove(target);
         this.numVertices--;
         return true;
