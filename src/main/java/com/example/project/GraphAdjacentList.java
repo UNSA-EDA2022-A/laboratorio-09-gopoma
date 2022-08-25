@@ -77,7 +77,8 @@ public class GraphAdjacentList implements Graph {
         for(int i = 0; i < this.vertices.size(); i++){
             count += this.vertices.get(i).adjacentVertices.size();
         }
-        return count;
+        // Case: getNumEdges works with older addEdge and removeEdge, so double insertion and deleting are not considered
+        return count / 2;
     }
 
     public int getNumVertices() {
@@ -100,6 +101,7 @@ public class GraphAdjacentList implements Graph {
     }
 
     // Taking into consideration a Undirected Graph (Extra implementation added in 'addEdge' and 'removeEdge' methods)
+    // Working in a Undirected Graph because the 'directional' implementation wasn't covered (harder that it looks :c)
     // Implementing DFS here taking into consideration the GraphMatrix DFS's implementation
     public ArrayList<Integer> dephFirstSearch(Vertex target, ArrayList<Integer> visited) {
         visited.add(target.data);
