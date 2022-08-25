@@ -40,12 +40,14 @@ public class GraphAdjacentList implements Graph {
     public boolean removeEdge(int from, int to) {
         Vertex fromV = null, toV = null;
         for(Vertex v: vertices) {
-            if(from == v.data)
+            if(from == v.data) {
                 fromV = v;
-            if(to == v.data)
+            } else if(to == v.data) {
                 toV = v;
-            if(fromV != null && toV != null)
+            }
+            if(fromV != null && toV != null) {
                 break;
+            }
         }
         if(fromV == null || toV == null) {
             return false;
@@ -128,8 +130,27 @@ public class GraphAdjacentList implements Graph {
         return cc;
     }
 
-    public boolean removeVertex(int vertex){
-        return false;
+    public boolean removeVertex(int vertex) {
+        Vertex target = null;
+        // Iterating over the vertices to find the target that its 'data' is 'vertex'
+        for(Vertex v: this.vertices) {
+            if(vertex == v.data) {
+                target = v;
+                break;
+            }
+        }
+        // If was not found, just return false
+        if(target == null) {
+            return false;
+        }
+
+        // As target.adjacentVertices could be resized, a normal iteration will ignore some adjacent values when deleting
+        while(!target.adjacentVertices.isEmpty()) {
+            this.removeEdge(vertex, target.adjacentVertices.get(0).data);
+        }
+        this.vertices.remove(target);
+        this.numVertices--;
+        return true;
     }
 
     public static void main(String args[]) {
@@ -143,7 +164,13 @@ public class GraphAdjacentList implements Graph {
         graph.addEdge(10, 12); 
         graph.addEdge(1024, 1025);                           
         System.out.println(graph);
-        System.out.println(graph.dephFirstSearch(5));
-        System.out.println(graph.countConnectedComponents());
+        System.out.println(graph.numVertices);
+        graph.removeVertex(1);
+        graph.removeVertex(1024);
+        System.out.println("After Deleting...");
+        System.out.println(graph);
+        System.out.println(graph.numVertices);
+        // System.out.println(graph.dephFirstSearch(5));
+        // System.out.println(graph.countConnectedComponents());
     }
 }
